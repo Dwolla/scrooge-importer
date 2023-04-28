@@ -1,0 +1,4 @@
+#make sure thrift dependencies are correctly imported
+> thrift-clients/compile
+> compile
+> check
