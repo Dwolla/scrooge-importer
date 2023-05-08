@@ -17,7 +17,7 @@ ThisBuild / developers := List(
     url("https://dwolla.com")
   )
 )
-ThisBuild / tlBaseVersion := "0.1"
+ThisBuild / tlBaseVersion := "0.2"
 ThisBuild / tlCiReleaseBranches := Seq("main")
 ThisBuild / tlSonatypeUseLegacyHost := true
 ThisBuild / sbtPlugin := true
