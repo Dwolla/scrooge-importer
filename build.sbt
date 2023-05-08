@@ -19,6 +19,7 @@ ThisBuild / developers := List(
 )
 ThisBuild / tlBaseVersion := "0.1"
 ThisBuild / tlCiReleaseBranches := Seq("main")
+ThisBuild / tlSonatypeUseLegacyHost := true
 ThisBuild / sbtPlugin := true
 
 lazy val testSettings: Seq[Def.Setting[_]] = Seq(
@@ -30,6 +31,7 @@ lazy val testSettings: Seq[Def.Setting[_]] = Seq(
 
 lazy val root = (project in file("."))
   .settings(
+    name:= "scrooge-importer",
     publish / skip := true,
     scripted := (scripted dependsOn (publisher / scripted).toTask("")).evaluated
   )
@@ -38,7 +40,6 @@ lazy val root = (project in file("."))
 
 lazy val core = (project in file("core"))
   .settings(
-    organization := "com.dwolla.sbt",
     name := "scrooge-importer",
     testSettings,
     addSbtPlugin("com.twitter" % "scrooge-sbt-plugin" % "22.7.0")
@@ -47,7 +48,6 @@ lazy val core = (project in file("core"))
 
 lazy val tagless = (project in file("tagless"))
   .settings(
-    organization := "com.dwolla.sbt",
     name := "scrooge-importer-tagless",
     testSettings,
     addSbtPlugin("com.twitter" % "scrooge-sbt-plugin" % "22.7.0"),
