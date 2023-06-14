@@ -16,11 +16,11 @@ object AddTaglessPlugin extends sbt.AutoPlugin {
     semanticdbEnabled := true,
     semanticdbVersion := scalafixSemanticdb.revision,
     scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(scalaVersion.value),
-    scalafixDependencies += "com.dwolla" %% "finagle-tagless-scalafix" % "0.3.0",
+    scalafixDependencies += "com.dwolla" %% s"finagle-tagless-scalafix-${com.twitter.BuildInfo.version}" % "1.1.0",
     ThriftClients / libraryDependencies ++= Seq(
       "org.typelevel" %% "cats-core" % "2.9.0",
-      "org.typelevel" %% "cats-tagless-macros" % "0.14.0",
-      "com.dwolla" %% "async-utils-finagle" % "0.3.0"
+      "org.typelevel" %% "cats-tagless-macros" % "0.15.0",
+      "com.dwolla" %% s"async-utils-finagle-${com.twitter.BuildInfo.version}" % "1.1.0"
     )
   )
 

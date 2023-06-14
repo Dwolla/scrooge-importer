@@ -32,10 +32,10 @@ lazy val testSettings: Seq[Def.Setting[_]] = Seq(
 lazy val root = (project in file("."))
   .settings(
     name:= "scrooge-importer",
-    publish / skip := true,
     scripted := (scripted dependsOn (publisher / scripted).toTask("")).evaluated
   )
   .aggregate(core, tagless)
+  .enablePlugins(NoPublishPlugin)
   .enablePlugins(SbtPlugin)
 
 lazy val core = (project in file("core"))
@@ -57,8 +57,6 @@ lazy val tagless = (project in file("tagless"))
   .enablePlugins(SbtPlugin)
 
 lazy val publisher = (project in file("publisher"))
-  .settings(
-    testSettings,
-    publish / skip := true
-  )
+  .settings(testSettings)
+  .enablePlugins(NoPublishPlugin)
   .enablePlugins(SbtPlugin)
