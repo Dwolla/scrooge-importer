@@ -37,19 +37,11 @@ object AddTaglessPlugin extends sbt.AutoPlugin {
       }.value
     )
 
-  lazy val scroogeProjectSettings =
-    Seq(
-      scalacOptions ~= (_.filterNot(s =>
-        s.startsWith("-Ywarn") || s.startsWith("-Xlint") || s.startsWith("-W") || s.equals(
-          "-Xfatal-warnings"
-        )
-      ))
-    )
 
   override def buildSettings: Seq[Def.Setting[_]] =
     super.buildSettings ++ scalafixBuildSettings
 
   override def projectSettings: Seq[Def.Setting[_]] =
-    super.projectSettings ++ scroogeProjectSettings ++ scalafixProjectSettings
+    super.projectSettings ++ scalafixProjectSettings
 
 }

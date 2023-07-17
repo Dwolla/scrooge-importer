@@ -3,8 +3,8 @@ package com.dwolla.sbt.thrift.consume
 import com.dwolla.sbt.thrift.consume.ThriftClientsPlugin.autoImport.{ThriftClients, `thrift-clients`, thriftDependencies}
 import com.twitter.scrooge.ScroogeSBT
 import com.twitter.scrooge.ScroogeSBT.autoImport.*
-import sbt.Keys._
-import sbt.*
+import sbt.Keys.*
+import sbt.{Def, *}
 
 object ThriftClientsPlugin extends sbt.AutoPlugin {
 
@@ -34,6 +34,18 @@ object ThriftClientsPlugin extends sbt.AutoPlugin {
         )
       )
   }
+
+  lazy val scroogeProjectSettings =
+    Seq(
+      scalacOptions ~= (_.filterNot(s =>
+        s.startsWith("-Ywarn") || s.startsWith("-Xlint") || s.startsWith("-W") || s.equals(
+          "-Xfatal-warnings"
+        )
+      ))
+    )
+
+  override def projectSettings: Seq[Def.Setting[_]] = super.projectSettings ++ scroogeProjectSettings
+
   override def extraProjects: Seq[Project] = Seq(`thrift-clients`)
 
   override def buildSettings: Seq[Def.Setting[_]] = ThriftClients / thriftDependencies := Nil
